@@ -17,5 +17,14 @@ class ModelUserSpec extends Specification {
 				user.password must equalTo("tfg")
 			}
 		}
+
+		"Register user" in {
+			running(FakeApplication(additionalConfiguration = inMemoryDatabase())) {
+				User.register(User("rocio", "gomez", "rgomez", "rg@gmail.com", "test"))
+				val Some(user) = User.authenticate("rg@gmail.com", "test")
+				user.email must equalTo("rg@gmail.com")
+				user.password must equalTo("test")
+			}
+		}
 	}
 }
