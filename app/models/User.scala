@@ -40,4 +40,14 @@ object User {
 				).executeUpdate()
 		}
 	}
+
+	def findByUsername(userName: String) : Option[User] = {
+		DB.withConnection { implicit connection => 
+			SQL(
+				"select * from user where username = {userName}"
+				).on(
+					'userName -> userName
+				).as(User.user.singleOpt)
+		}
+	}
 }

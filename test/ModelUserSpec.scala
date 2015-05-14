@@ -18,12 +18,19 @@ class ModelUserSpec extends Specification {
 			}
 		}
 
-		"Register user" in {
+		"Register user Rocio Gomez" in {
 			running(FakeApplication(additionalConfiguration = inMemoryDatabase())) {
 				User.register(User("rocio", "gomez", "rgomez", "rg@gmail.com", "test"))
 				val Some(user) = User.authenticate("rg@gmail.com", "test")
 				user.email must equalTo("rg@gmail.com")
 				user.password must equalTo("test")
+			}
+		}
+
+		"Find user with username jvrpiris" in {
+			running(FakeApplication(additionalConfiguration = inMemoryDatabase())) {
+				val Some(user) = User.findByUsername("jvrpiris")
+				user.userName must equalTo("jvrpiris")
 			}
 		}
 	}
