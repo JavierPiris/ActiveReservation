@@ -7,7 +7,7 @@ CREATE TABLE user (
 	password varchar(50) NOT NULL
 );
 
-INSERT INTO user (username, email, password) values ('jvrpiris', 'jvrpiris@gmail.com', 'tfg');
+INSERT INTO user (firstname, lastname, username, email, password) values ('javier', 'piris', 'jvrpiris', 'jvrpiris@gmail.com', 'tfg');
 
 #--- !Downs
 DROP TABLE IF EXISTS user;
