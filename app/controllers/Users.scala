@@ -17,6 +17,17 @@ object Users extends Controller {
 			"password" -> text
 			).verifying("Invalid email or password", result => result match{
 				case (email, password) => User.authenticate(email, password).isDefined
-				}) 
+			}
+		) 
+	)
+
+	val registerForm = Form (
+		mapping (
+			"firstName" -> text,
+			"lastName" -> text,
+			"userName" -> nonEmptyText,
+			"email" -> nonEmptyText,
+			"password" -> nonEmptyText
+		)(User.apply)(User.unapply)
 	)
 }
