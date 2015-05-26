@@ -25,7 +25,7 @@ object Users extends Controller {
 		mapping (
 			"firstName" -> text,
 			"lastName" -> text,
-			"userName" -> nonEmptyText,
+			"userName" -> text.verifying("validation.ean.duplicate", User.findByUsername(_).isEmpty),
 			"email" -> nonEmptyText,
 			"password" -> nonEmptyText
 		)(User.apply)(User.unapply)
